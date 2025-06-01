@@ -1,28 +1,37 @@
+// src/App.jsx - BONUS VERSION using reusable Exponent component
+import { useState } from "react";
 import "./App.css";
+
 import Counter from "./components/Counter";
-import ExponentTwo from "./components/ExponentTwo";
-import ExponentThree from "./components/ExponentThree";
-import ExponentFour from "./components/ExponentFour";
-import ExponentFive from "./components/ExponentFive";
-import ExponentSix from "./components/ExponentSix";
+import Exponent from "./components/Exponent";
 
+function App() {
+  // Lifted state to the common parent (App)
+  const [count, setCount] = useState(0);
+  
+  // State logic moved to App
+  const decrement = () => setCount((prevCount) => prevCount - 1);
+  const increment = () => setCount((prevCount) => prevCount + 1);
 
-function App () {
   return (
     <div className="App">
       <h2><em>Counter</em></h2>
-  
-      <Counter/>
+      <Counter 
+        count={count} 
+        increment={increment} 
+        decrement={decrement} 
+      />
 
       <br />
       <h2><em>Exponents</em></h2>
 
       <div className="container">
-        <ExponentTwo />
-        <ExponentThree />
-        <ExponentFour />
-        <ExponentFive />
-        <ExponentSix />
+        {/* Using the reusable Exponent component */}
+        <Exponent num={count} exponent={2} />
+        <Exponent num={count} exponent={3} />
+        <Exponent num={count} exponent={4} />
+        <Exponent num={count} exponent={5} />
+        <Exponent num={count} exponent={6} />
       </div>
     </div>
   );
